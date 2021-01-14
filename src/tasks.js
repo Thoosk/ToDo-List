@@ -1,16 +1,16 @@
 const taskFactory = (name, dueDate) => {
-  let name = name;
-  let dueDate = dueDate;
+  let taskName = name;
+  let taskDueDate = dueDate;
   let priority = 0;
   let finished = 0;
   let description = "";
 
   const changeName = (newName) => {
-    name = newName;
+    taskName = newName;
   };
 
   const changeDate = (newDate) => {
-    dueDate = newDate;
+    taskDueDate = newDate;
   };
 
   const changePriority = (newPriority) => {
@@ -25,5 +25,17 @@ const taskFactory = (name, dueDate) => {
     finished = 1;
   };
 
-  return { name, dueDate };
+  return { taskName, taskDueDate };
 };
+
+const taskLibrary = (task) => {
+  let taskCollection = [];
+
+  const addTask = (task) => {
+    taskCollection.push(task);
+  };
+
+  return { taskCollection, addTask };
+};
+
+export { taskFactory };
