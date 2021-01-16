@@ -1,7 +1,7 @@
-const taskFactory = (name, dueDate, desc) => {
+const taskFactory = (name, dueDate, desc, prior) => {
   let taskName = name;
   let taskDueDate = dueDate;
-  let priority = 0;
+  let priority = prior;
   let finished = 0;
   let description = desc;
 
@@ -25,7 +25,7 @@ const taskFactory = (name, dueDate, desc) => {
     finished = 1;
   };
 
-  return { taskName, taskDueDate, description };
+  return { taskName, taskDueDate, description, priority };
 };
 
 const taskLibrary = (task) => {

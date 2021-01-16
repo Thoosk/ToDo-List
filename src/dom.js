@@ -104,8 +104,13 @@ function minimizeTask(taskUpArrow) {
   downArrowImg.style.display = "";
 }
 
+function showPopUp() {
+  const popUp = document.querySelector("#popup");
+  popUp.style.display = "block";
+}
+
 // function editTask(taskButton) {
 //   const editButton = document.
 // }
 
-export { createTask, expandTask, minimizeTask };
+export { createTask, expandTask, minimizeTask, showPopUp };

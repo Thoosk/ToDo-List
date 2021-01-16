@@ -1,14 +1,26 @@
-import { createTask, expandTask, minimizeTask } from "./dom.js";
+import { createTask, expandTask, minimizeTask, showPopUp } from "./dom.js";
 import { taskFactory } from "./tasks.js";
 
 function addEvents() {
   function addingListener() {
     const adding = document.getElementById("add-task");
     adding.addEventListener("click", () => {
-      const name = prompt("Name of Task", "Taskname");
-      const dueDate = prompt("Due Date", "Date");
-      const description = prompt("Description", "What to do");
-      const newTask = taskFactory(name, dueDate, description);
+      showPopUp();
+    });
+  }
+
+  function submitListener() {
+    const taskSubmit = document.querySelector("#submit-task");
+    const popUp = document.querySelector("#popup");
+    taskSubmit.addEventListener("click", () => {
+      console.log("test");
+      const newTask = taskFactory(
+        document.querySelector("#taskName").value,
+        document.querySelector("#dueDate").value,
+        document.querySelector("#description").value,
+        document.querySelector("#priority").value
+      );
+      popUp.style.display = "none";
       createTask(newTask);
       addSingleExpandListener();
       minimizeListener();
@@ -54,6 +66,7 @@ function addEvents() {
   addingListener();
   expandListener();
   minimizeListener();
+  submitListener();
 }
 
 addEvents();
