@@ -34,9 +34,20 @@ function createTask(task) {
   expandSpan.classList.add("expand");
   expandSpan.appendChild(expandImg);
 
+  const deleteButton = document.createElement("img");
+  deleteButton.setAttribute("src", "../src/images/iconmonstr-x-mark-9.svg");
+  deleteButton.style.display = "none";
+
+  const checkButton = document.createElement("img");
+  checkButton.setAttribute("src", "../src/images/iconmonstr-check-mark-13.svg");
+  checkButton.style.display = "none";
+
   infoSection.appendChild(name);
   infoSection.appendChild(dueDate);
   infoSection.appendChild(priority);
+
+  infoSection.appendChild(deleteButton);
+  infoSection.appendChild(checkButton);
   infoSection.appendChild(expandSpan);
   taskDiv.appendChild(infoSection);
 
@@ -65,24 +76,10 @@ function expandTask(taskArrow) {
   const downArrowSpan = taskArrow;
   const task = downArrowSpan.parentElement.parentElement;
   const taskInfo = downArrowSpan.parentElement;
-  // chosenTask.classList.add("open");
-
-  const deleteButton = document.createElement("img");
-  deleteButton.setAttribute("src", "../src/images/iconmonstr-x-mark-9.svg");
-
-  const checkButton = document.createElement("img");
-  checkButton.setAttribute("src", "../src/images/iconmonstr-check-mark-13.svg");
-
-  const deleteNode = downArrowSpan.parentElement.insertBefore(
-    deleteButton,
-    downArrowSpan
-  );
-  const checkNode = downArrowSpan.parentElement.insertBefore(
-    checkButton,
-    downArrowSpan
-  );
-
   downArrowSpan.style.display = "none";
+  downArrowSpan.previousElementSibling.previousElementSibling.style.display =
+    "";
+  downArrowSpan.previousElementSibling.style.display = "";
   task.classList.add("open");
   taskInfo.nextElementSibling.classList.add("expanded");
 
@@ -106,5 +103,9 @@ function minimizeTask(taskUpArrow) {
   deleteImg.style.display = "none";
   downArrowImg.style.display = "";
 }
+
+// function editTask(taskButton) {
+//   const editButton = document.
+// }
 
 export { createTask, expandTask, minimizeTask };
