@@ -27,6 +27,7 @@ html, body, div, span, applet, object, iframe,
             font: inherit;
             font-family: Bookman, URW Bookman L, serif ;
             vertical-align: baseline;
+
         }
 /* HTML5 display-role reset for older browsers */
 /* prettier-ignore */
@@ -57,4 +58,8 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+html {
+  overflow-x: hidden;
 }

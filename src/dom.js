@@ -1,4 +1,4 @@
-import { taskFactory } from "./tasks.js";
+import { taskFactory, taskCollection, checkIfFieldIsEmpty } from "./tasks.js";
 
 function createTasksWindow() {
   const tasksDiv = document.createElement("div");
@@ -27,7 +27,8 @@ function createTask(task) {
   const dueDate = document.createElement("p");
   dueDate.innerHTML = task.taskDueDate;
   const priority = document.createElement("img");
-  priority.setAttribute("src", "../src/images/iconmonstr-warning-10.svg");
+  let priorityLevel = setPriority(task.priority);
+  priority.setAttribute("src", priorityLevel);
   const expandImg = document.createElement("img");
   expandImg.setAttribute("src", "../src/images/iconmonstr-arrow-65.svg");
   const expandSpan = document.createElement("span");
@@ -37,16 +38,24 @@ function createTask(task) {
   const deleteButton = document.createElement("img");
   deleteButton.setAttribute("src", "../src/images/iconmonstr-x-mark-9.svg");
   deleteButton.style.display = "none";
+  deleteButton.classList.add("delete");
+
+  const editButton = document.createElement("img");
+  editButton.setAttribute("src", "../src/images/iconmonstr-pencil-8.svg");
+  editButton.style.display = "none";
+  editButton.classList.add("edit");
 
   const checkButton = document.createElement("img");
   checkButton.setAttribute("src", "../src/images/iconmonstr-check-mark-13.svg");
   checkButton.style.display = "none";
+  checkButton.classList.add("check");
 
   infoSection.appendChild(name);
   infoSection.appendChild(dueDate);
   infoSection.appendChild(priority);
 
   infoSection.appendChild(deleteButton);
+  infoSection.appendChild(editButton);
   infoSection.appendChild(checkButton);
   infoSection.appendChild(expandSpan);
   taskDiv.appendChild(infoSection);
@@ -79,11 +88,11 @@ function expandTask(taskArrow) {
   downArrowSpan.style.display = "none";
   downArrowSpan.previousElementSibling.previousElementSibling.style.display =
     "";
+  downArrowSpan.previousElementSibling.previousElementSibling.previousElementSibling.style.display =
+    "";
   downArrowSpan.previousElementSibling.style.display = "";
   task.classList.add("open");
   taskInfo.nextElementSibling.classList.add("expanded");
-
-  // add new section 'expanded'
 }
 
 function minimizeTask(taskUpArrow) {
@@ -94,13 +103,17 @@ function minimizeTask(taskUpArrow) {
   task.classList.remove("open");
 
   const checkImg = task.firstElementChild.lastElementChild.previousSibling;
-  const deleteImg =
+  const editImg =
     task.firstElementChild.lastElementChild.previousSibling.previousSibling;
+  const deleteImg =
+    task.firstElementChild.lastElementChild.previousSibling.previousSibling
+      .previousSibling;
 
   const downArrowImg = task.firstElementChild.lastElementChild;
 
   checkImg.style.display = "none";
   deleteImg.style.display = "none";
+  editImg.style.display = "none";
   downArrowImg.style.display = "";
 }
 
@@ -109,8 +122,78 @@ function showPopUp() {
   popUp.style.display = "block";
 }
 
-// function editTask(taskButton) {
-//   const editButton = document.
-// }
+function removeTask(task) {
+  task.remove();
+}
 
-export { createTask, expandTask, minimizeTask, showPopUp };
+function clonePopUp(task) {
+  // clone old fill-out form
+  const popUp = document.getElementById("popup");
+  const clone = popUp.cloneNode(true);
+
+  const mainElement = document.getElementById("main");
+  clone.setAttribute("id", "edit-popup");
+  clone.style.display = "";
+  mainElement.appendChild(clone);
+
+  return clone.lastElementChild.lastElementChild;
+}
+
+function editTaskInDOM(
+  taskElement,
+  newName,
+  newDueDate,
+  newDescription,
+  newPriority
+) {
+  const taskInfoSection = taskElement.firstElementChild;
+  const taskDescription = taskElement.lastElementChild;
+
+  // change description
+  // taskDescription.firstElementChild.innerHTML = newDescription;
+  if (!checkIfFieldIsEmpty(newDescription)) {
+    taskDescription.firstElementChild.innerHTML = newDescription;
+  }
+
+  // change name
+  // taskInfoSection.firstElementChild.innerHTML = newName;
+  if (!checkIfFieldIsEmpty(newName)) {
+    taskInfoSection.firstElementChild.innerHTML = newName;
+  }
+
+  // change duedate
+  // taskInfoSection.firstElementChild.nextElementSibling.innerHTML = newDueDate;
+  if (!checkIfFieldIsEmpty(newDueDate)) {
+    taskInfoSection.firstElementChild.nextElementSibling.innerHTML = newDueDate;
+  }
+
+  // change priority
+  let changedPriority = setPriority(newPriority);
+
+  taskInfoSection.firstElementChild.nextElementSibling.nextElementSibling.setAttribute(
+    "src",
+    changedPriority
+  );
+}
+
+function setPriority(priorityGrade) {
+  let priority = Number(priorityGrade);
+  switch (priority) {
+    case 0:
+      return "../src/images/iconmonstr-warning-10-low.svg";
+    case 1:
+      return "../src/images/iconmonstr-warning-10-medium.svg";
+    case 2:
+      return "../src/images/iconmonstr-warning-10-high.svg";
+  }
+}
+
+export {
+  createTask,
+  expandTask,
+  minimizeTask,
+  showPopUp,
+  removeTask,
+  clonePopUp,
+  editTaskInDOM,
+};
