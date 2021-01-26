@@ -50,9 +50,7 @@ function editTaskInCollection(
   if (!checkIfFieldIsEmpty(newDescription)) {
     taskCollection[foundIndex].description = newDescription;
   }
-  // taskCollection[foundIndex].taskName = newTaskName;
-  // taskCollection[foundIndex].dueDate = newDueDate;
-  // taskCollection[foundIndex].description = newDescription;
+
   taskCollection[foundIndex].priority = newPriority;
 }
 
@@ -64,6 +62,16 @@ function checkIfFieldIsEmpty(value) {
   }
 }
 
+function checkOffTask(chosenTaskName) {
+  let foundIndex = taskCollection.findIndex(
+    (task) => task.taskName === chosenTaskName
+  );
+
+  taskCollection[foundIndex].finished = 1;
+
+  console.log(taskCollection);
+}
+
 export {
   taskFactory,
   taskCollection,
@@ -71,4 +79,5 @@ export {
   removeTaskFromCollection,
   editTaskInCollection,
   checkIfFieldIsEmpty,
+  checkOffTask,
 };

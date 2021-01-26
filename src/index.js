@@ -6,6 +6,7 @@ import {
   removeTask,
   clonePopUp,
   editTaskInDOM,
+  createProject,
 } from "./dom.js";
 import {
   taskFactory,
@@ -13,7 +14,10 @@ import {
   taskCollection,
   removeTaskFromCollection,
   editTaskInCollection,
+  checkOffTask,
 } from "./tasks.js";
+
+import { Project } from "./projects.js";
 
 function addEvents() {
   function addingListener() {
@@ -99,7 +103,7 @@ function addEvents() {
 
   function editListener() {
     const tasksElement = document.getElementById("tasks");
-    // console.log(tasksElement);
+
     const editElement =
       tasksElement.lastElementChild.lastElementChild.previousElementSibling
         .lastElementChild.previousElementSibling.previousElementSibling;
@@ -111,33 +115,31 @@ function addEvents() {
       const submitElement = clonePopUp(editElement);
 
       const taskName = task.firstChild.firstChild.innerHTML;
-      // console.log(taskName);
+
       editSubmitListener(submitElement, taskName, task);
     });
   }
 
   function editSubmitListener(submitButton, taskName, task) {
     let oldTaskName = taskName;
-    // console.log(oldTaskName);
+
     submitButton.addEventListener("click", () => {
       const priority =
         submitButton.previousElementSibling.previousElementSibling;
-      // console.log(priority.value);
+
       const description =
         priority.previousElementSibling.previousElementSibling
           .previousElementSibling;
-      // console.log(description.value);
+
       const dueDate =
         description.previousElementSibling.previousElementSibling
           .previousElementSibling.previousElementSibling;
-      // console.log(dueDate.value);
+
       const name =
         dueDate.previousElementSibling.previousElementSibling
           .previousElementSibling.previousElementSibling;
-      // console.log(name.value);
-      submitButton.parentElement.parentElement.remove();
 
-      // console.log(name.value, dueDate.value, description.value, priority.value);
+      submitButton.parentElement.parentElement.remove();
 
       editTaskInCollection(
         oldTaskName,
@@ -166,17 +168,35 @@ function addEvents() {
 
     const task = checkElement.parentElement.parentElement;
 
-    console.log(checkElement);
+    const taskName = task.firstElementChild.firstElementChild.innerHTML;
+
+    checkElement.addEventListener("click", () => {
+      task.style.opacity = 0.2;
+      checkOffTask(taskName);
+    });
+  }
+
+  function addCreateProjectListener() {
+    const projectsElement = document.getElementById("projects");
+
+    const newProjectButton = projectsElement.lastElementChild;
+
+    console.log(newProjectButton);
+    newProjectButton.addEventListener("click", () => {
+      console.log("Test");
+      createProject();
+    });
   }
 
   // WIP
 
   addingListener();
-  expandListener();
-  minimizeListener();
+  // expandListener();
+  // minimizeListener();
   submitListener();
-  addSingleRemoveListener();
-  editListener();
+  // addSingleRemoveListener();
+  // editListener();
+  addCreateProjectListener();
 }
 
 addEvents();

@@ -1,4 +1,5 @@
 import { taskFactory, taskCollection, checkIfFieldIsEmpty } from "./tasks.js";
+import { Project } from "./projects.js";
 
 function createTasksWindow() {
   const tasksDiv = document.createElement("div");
@@ -78,6 +79,12 @@ function createTask(task) {
   taskDiv.appendChild(descSection);
 
   const tasks = document.getElementById("tasks");
+
+  // check if task is already finished
+  // if (task.finished) {
+
+  // }
+
   tasks.appendChild(taskDiv);
 }
 
@@ -150,19 +157,16 @@ function editTaskInDOM(
   const taskDescription = taskElement.lastElementChild;
 
   // change description
-  // taskDescription.firstElementChild.innerHTML = newDescription;
   if (!checkIfFieldIsEmpty(newDescription)) {
     taskDescription.firstElementChild.innerHTML = newDescription;
   }
 
   // change name
-  // taskInfoSection.firstElementChild.innerHTML = newName;
   if (!checkIfFieldIsEmpty(newName)) {
     taskInfoSection.firstElementChild.innerHTML = newName;
   }
 
   // change duedate
-  // taskInfoSection.firstElementChild.nextElementSibling.innerHTML = newDueDate;
   if (!checkIfFieldIsEmpty(newDueDate)) {
     taskInfoSection.firstElementChild.nextElementSibling.innerHTML = newDueDate;
   }
@@ -188,6 +192,21 @@ function setPriority(priorityGrade) {
   }
 }
 
+function createProject() {
+  const projectName = prompt(
+    "What is the name of your new project?",
+    "Projectname"
+  );
+
+  const newProject = new Project(projectName);
+
+  const newProjectElement = document.createElement("h1");
+  newProjectElement.innerHTML = projectName;
+
+  const projectsElement = document.getElementById("projects");
+  projectsElement.appendChild(newProjectElement);
+}
+
 export {
   createTask,
   expandTask,
@@ -196,4 +215,5 @@ export {
   removeTask,
   clonePopUp,
   editTaskInDOM,
+  createProject,
 };
