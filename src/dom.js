@@ -79,6 +79,7 @@ function createTask(task) {
   taskDiv.appendChild(descSection);
 
   const tasks = document.getElementById("tasks");
+  // const taskList = document.querySelector(".task-list");
 
   // check if task is already finished
   // if (task.finished) {
@@ -200,11 +201,19 @@ function createProject() {
 
   const newProject = new Project(projectName);
 
-  const newProjectElement = document.createElement("h1");
+  const newProjectElement = document.createElement("p");
   newProjectElement.innerHTML = projectName;
+  newProjectElement.classList.add("project");
 
   const projectsElement = document.getElementById("projects");
   projectsElement.appendChild(newProjectElement);
+}
+
+function switchProject(projectName) {
+  const allTasks = document.querySelectorAll(".task");
+  allTasks.forEach((task) => {
+    task.style.display = "none";
+  });
 }
 
 export {
@@ -216,4 +225,5 @@ export {
   clonePopUp,
   editTaskInDOM,
   createProject,
+  switchProject,
 };

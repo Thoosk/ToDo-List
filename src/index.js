@@ -7,6 +7,7 @@ import {
   clonePopUp,
   editTaskInDOM,
   createProject,
+  switchProject,
 } from "./dom.js";
 import {
   taskFactory,
@@ -179,12 +180,24 @@ function addEvents() {
   function addCreateProjectListener() {
     const projectsElement = document.getElementById("projects");
 
-    const newProjectButton = projectsElement.lastElementChild;
+    const newProjectButton =
+      projectsElement.firstElementChild.nextElementSibling;
 
     console.log(newProjectButton);
     newProjectButton.addEventListener("click", () => {
       console.log("Test");
       createProject();
+      addSwitchProjectListener();
+    });
+  }
+
+  function addSwitchProjectListener() {
+    const projectElements = document.querySelectorAll(".project");
+
+    projectElements.forEach((project) => {
+      project.addEventListener("click", () => {
+        console.log(project);
+      });
     });
   }
 
@@ -197,6 +210,7 @@ function addEvents() {
   // addSingleRemoveListener();
   // editListener();
   addCreateProjectListener();
+  addSwitchProjectListener();
 }
 
 addEvents();
