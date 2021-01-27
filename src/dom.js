@@ -78,15 +78,16 @@ function createTask(task) {
   descSection.appendChild(closeSpan);
   taskDiv.appendChild(descSection);
 
-  const tasks = document.getElementById("tasks");
-  // const taskList = document.querySelector(".task-list");
+  // const tasks = document.getElementById("tasks");
+  const taskList = document.querySelector(".task-list");
 
   // check if task is already finished
   // if (task.finished) {
 
   // }
 
-  tasks.appendChild(taskDiv);
+  // tasks.appendChild(taskDiv);
+  taskList.appendChild(taskDiv);
 }
 
 function expandTask(taskArrow) {
@@ -207,6 +208,8 @@ function createProject() {
 
   const projectsElement = document.getElementById("projects");
   projectsElement.appendChild(newProjectElement);
+
+  // add a function to create a new task-list where the value == the projectname
 }
 
 function switchProject(projectName) {
