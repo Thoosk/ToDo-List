@@ -225,8 +225,7 @@ function addEvents() {
 
     projectElements.forEach((project) => {
       project.addEventListener("click", () => {
-        console.log(project);
-
+        switchProject(project.textContent);
         // hide all task-lists where value != projectname
       });
     });

@@ -80,7 +80,7 @@ function createTask(task) {
 
   // const tasks = document.getElementById("tasks");
   const taskList = document.querySelector(".task-list");
-
+  taskDiv.setAttribute("value", taskList.attributes.value.nodeValue);
   // check if task is already finished
   // if (task.finished) {
 
@@ -210,14 +210,35 @@ function createProject() {
   projectsElement.appendChild(newProjectElement);
 
   // add a function to create a new task-list where the value == the projectname
+
+  // const newTaskList = document.createElement("section");
+  // newTaskList.classList.add("task-list");
+  // newTaskList.value = projectName;
+  // const tasksElement = document.getElementById("tasks");
+  // tasksElement.appendChild(newTaskList);
+  switchProject(projectName);
 }
 
 function switchProject(projectName) {
-  const allTasks = document.querySelectorAll(".task");
-  allTasks.forEach((task) => {
-    task.style.display = "none";
+  //where class == task-list and task-list.value != projectname -> hide
+
+  const taskList = document.querySelector(".task-list");
+  taskList.setAttribute("value", projectName);
+
+  let taskElements = document.querySelectorAll(".task");
+
+  taskElements.forEach((task) => {
+    if (
+      task.attributes.value.nodeValue.toLowerCase() == projectName.toLowerCase()
+    ) {
+      task.style.display = "flex";
+    } else {
+      task.style.display = "none";
+    }
   });
 }
+
+// function
 
 export {
   createTask,
