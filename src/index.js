@@ -66,9 +66,16 @@ function addEvents() {
 
   // works for single new expand arrow
   function addSingleExpandListener() {
-    const tasksElement = document.getElementById("tasks");
+    // OLD WAY
+    // const tasksElement = document.getElementById("tasks");
+
+    // const newTaskArrow =
+    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
+    //     .lastElementChild;
+
+    const taskList = document.querySelector(".task-list");
     const newTaskArrow =
-      tasksElement.lastElementChild.lastElementChild.previousElementSibling
+      taskList.lastElementChild.lastElementChild.previousElementSibling
         .lastElementChild;
 
     newTaskArrow.addEventListener("click", () => {
@@ -87,10 +94,18 @@ function addEvents() {
   }
 
   function addSingleRemoveListener() {
-    const tasksElement = document.getElementById("tasks");
-    const task = tasksElement.lastElementChild;
+    // OLD WAY
+    // const tasksElement = document.getElementById("tasks");
+    // const task = tasksElement.lastElementChild;
+    // const removeElement =
+    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
+    //     .lastElementChild.previousElementSibling.previousElementSibling
+    //     .previousElementSibling;
+
+    const taskList = document.querySelector(".task-list");
+    const task = taskList.lastElementChild;
     const removeElement =
-      tasksElement.lastElementChild.lastElementChild.previousElementSibling
+      taskList.lastElementChild.lastElementChild.previousElementSibling
         .lastElementChild.previousElementSibling.previousElementSibling
         .previousElementSibling;
 
@@ -100,13 +115,22 @@ function addEvents() {
         task.firstElementChild.firstElementChild.textContent
       );
     });
+
+    console.log(taskCollection);
   }
 
   function editListener() {
-    const tasksElement = document.getElementById("tasks");
+    //OLD WAY
+    // const tasksElement = document.getElementById("tasks");
+
+    // const editElement =
+    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
+    //     .lastElementChild.previousElementSibling.previousElementSibling;
+
+    const taskList = document.querySelector(".task-list");
 
     const editElement =
-      tasksElement.lastElementChild.lastElementChild.previousElementSibling
+      taskList.lastElementChild.lastElementChild.previousElementSibling
         .lastElementChild.previousElementSibling.previousElementSibling;
 
     const task = editElement.parentElement.parentElement;
@@ -161,19 +185,25 @@ function addEvents() {
   }
 
   function addCheckListener() {
-    const tasksElement = document.getElementById("tasks");
-    // console.log(tasksElement);
+    //OLD WAY
+    // const tasksElement = document.getElementById("tasks");
+
+    // const checkElement =
+    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
+    //     .lastElementChild.previousElementSibling;
+
+    const taskList = document.querySelector(".task-list");
+
     const checkElement =
-      tasksElement.lastElementChild.lastElementChild.previousElementSibling
+      taskList.lastElementChild.lastElementChild.previousElementSibling
         .lastElementChild.previousElementSibling;
 
     const task = checkElement.parentElement.parentElement;
 
-    const taskName = task.firstElementChild.firstElementChild.innerHTML;
-
     checkElement.addEventListener("click", () => {
       task.style.opacity = 0.2;
-      checkOffTask(taskName);
+      // checkOffTask(taskName);
+      checkOffTask(task.firstElementChild.firstElementChild.innerHTML);
     });
   }
 
@@ -185,7 +215,6 @@ function addEvents() {
 
     console.log(newProjectButton);
     newProjectButton.addEventListener("click", () => {
-      console.log("Test");
       createProject();
       addSwitchProjectListener();
     });
@@ -196,7 +225,8 @@ function addEvents() {
 
     projectElements.forEach((project) => {
       project.addEventListener("click", () => {
-        console.log(project);
+        switchProject(project.textContent);
+        // hide all task-lists where value != projectname
       });
     });
   }

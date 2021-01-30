@@ -38,9 +38,12 @@ function editTaskInCollection(
   let foundIndex = taskCollection.findIndex(
     (task) => task.taskName === previousName
   );
+  console.log(taskCollection);
 
   if (!checkIfFieldIsEmpty(newTaskName)) {
     taskCollection[foundIndex].taskName = newTaskName;
+    console.log("test2");
+    console.log(previousName, newTaskName);
   }
 
   if (!checkIfFieldIsEmpty(newDueDate)) {
@@ -52,6 +55,8 @@ function editTaskInCollection(
   }
 
   taskCollection[foundIndex].priority = newPriority;
+
+  console.log(taskCollection);
 }
 
 function checkIfFieldIsEmpty(value) {
@@ -63,10 +68,13 @@ function checkIfFieldIsEmpty(value) {
 }
 
 function checkOffTask(chosenTaskName) {
+  console.log(taskCollection);
+  console.log(chosenTaskName);
+  // console.log();
   let foundIndex = taskCollection.findIndex(
     (task) => task.taskName === chosenTaskName
   );
-
+  console.log(foundIndex);
   taskCollection[foundIndex].finished = 1;
 
   console.log(taskCollection);
