@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link href="../src/reset.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div id="viewfield">
+
+        <header>
+            <h1>ToDo Gist</h1>
+            <p>Getting the gist of doing your projects</p>
+        </header>
+
+        <div id="main">
+            <div id="popup">
+                <form id="new-task-form">
+                    <label for="taskName" id="taskName-label" class="form-item">Task</label><br>
+                    <input type="text" id="taskName" name="taskName" class="form-item" required
+                        placeholder="Enter task name"><br>
+                    <label for="dueDate" id="date-label" class="form-item">Due Date</label><br>
+                    <input type="date" id="dueDate" name="dueDate" class="form-item" required
+                        placeholder="Enter the due date"><br>
+                    <label for="description" id="description-label" class="form-item">Description</label><br>
+                    <input type="text" id="description" name="description" class="form-item" placeholder="Description"
+                        min="5"><br>
+                    <label for="priority" id="priority-label" name="priority" class="form-item">Priority</label>
+                    <input type="range" id="priority" name="priority" class="form-item" list="tickmarks" step="1"
+                        min="0" max="2">
+                    <datalist id="tickmarks">
+                        <option value="0" label="Low"></option>
+                        <option value="1" label="Medium"></option>
+                        <option value="2" label="High"></option>
+                    </datalist>
+                    <button type="button" id="submit-task" value="submit-task" class="form-item">SUBMIT</button>
+                </form>
+            </div>
+
+            <div id="projects">
+                <h1>Projects</h1>
+                <img src="../src/images/iconmonstr-plus-2.svg">
+                <p class="project">Default</p>
+            </div>
+
+            <div id="tasks">
+                <section class="task-head">
+                    <h1>Tasks</h1>
+                    <span id="add-task"><img src="../src/images/iconmonstr-plus-2.svg"></span>
+                </section>
+                <section class="task-list" value="default">
+
+                </section>
+                <!-- 
+                <div class="task">
+                    <section class="info">
+                        <p>name</p>
+                        <p>due date</p>
+                        <img src="../src/images/iconmonstr-warning-10-low.svg">
+                        <span class="expand"><img src="../src/images/iconmonstr-arrow-65.svg"></span>
+                    </section>
+                </div>
+                <div class="open">
+                    <section class="info">
+                        <p>name</p>
+                        <p>due date</p>
+                        <img src="../src/images/iconmonstr-warning-10-high.svg">
+                        <img src="../src/images/iconmonstr-x-mark-9.svg">
+                        <img src="../src/images/iconmonstr-check-mark-13.svg">
+                    </section>
+                    <section class="description expanded">
+                        <p>description</p>
+                        <span class="close">
+                            <img src="../src/images/iconmonstr-arrow-66.svg">
+                        </span>
+                    </section>
+                </div> -->
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
