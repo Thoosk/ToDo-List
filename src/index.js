@@ -244,3 +244,11 @@ function addEvents() {
 }
 
 addEvents();
+
+// local storage fun
+
+// let tasksArray = [];
+
+// localStorage.setItem("tasks", JSON.stringify(tasksArray));
+
+// const data = JSON.parse(localStorage.getItem("tasks"));

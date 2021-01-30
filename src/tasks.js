@@ -68,16 +68,10 @@ function checkIfFieldIsEmpty(value) {
 }
 
 function checkOffTask(chosenTaskName) {
-  console.log(taskCollection);
-  console.log(chosenTaskName);
-  // console.log();
   let foundIndex = taskCollection.findIndex(
     (task) => task.taskName === chosenTaskName
   );
-  console.log(foundIndex);
   taskCollection[foundIndex].finished = 1;
-
-  console.log(taskCollection);
 }
 
 export {
