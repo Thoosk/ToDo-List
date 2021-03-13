@@ -1,5 +1,6 @@
-import "./style.css";
 import "./reset.css";
+import "./style.css";
+
 import {
   createTask,
   expandTask,
