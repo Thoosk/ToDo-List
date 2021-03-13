@@ -1,3 +1,5 @@
+import "./style.css";
+import "./reset.css";
 import {
   createTask,
   expandTask,
@@ -66,13 +68,6 @@ function addEvents() {
 
   // works for single new expand arrow
   function addSingleExpandListener() {
-    // OLD WAY
-    // const tasksElement = document.getElementById("tasks");
-
-    // const newTaskArrow =
-    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
-    //     .lastElementChild;
-
     const taskList = document.querySelector(".task-list");
     const newTaskArrow =
       taskList.lastElementChild.lastElementChild.previousElementSibling
@@ -94,14 +89,6 @@ function addEvents() {
   }
 
   function addSingleRemoveListener() {
-    // OLD WAY
-    // const tasksElement = document.getElementById("tasks");
-    // const task = tasksElement.lastElementChild;
-    // const removeElement =
-    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
-    //     .lastElementChild.previousElementSibling.previousElementSibling
-    //     .previousElementSibling;
-
     const taskList = document.querySelector(".task-list");
     const task = taskList.lastElementChild;
     const removeElement =
@@ -120,13 +107,6 @@ function addEvents() {
   }
 
   function editListener() {
-    //OLD WAY
-    // const tasksElement = document.getElementById("tasks");
-
-    // const editElement =
-    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
-    //     .lastElementChild.previousElementSibling.previousElementSibling;
-
     const taskList = document.querySelector(".task-list");
 
     const editElement =
@@ -185,13 +165,6 @@ function addEvents() {
   }
 
   function addCheckListener() {
-    //OLD WAY
-    // const tasksElement = document.getElementById("tasks");
-
-    // const checkElement =
-    //   tasksElement.lastElementChild.lastElementChild.previousElementSibling
-    //     .lastElementChild.previousElementSibling;
-
     const taskList = document.querySelector(".task-list");
 
     const checkElement =
@@ -202,7 +175,7 @@ function addEvents() {
 
     checkElement.addEventListener("click", () => {
       task.style.opacity = 0.2;
-      // checkOffTask(taskName);
+
       checkOffTask(task.firstElementChild.firstElementChild.innerHTML);
     });
   }
@@ -226,29 +199,14 @@ function addEvents() {
     projectElements.forEach((project) => {
       project.addEventListener("click", () => {
         switchProject(project.textContent);
-        // hide all task-lists where value != projectname
       });
     });
   }
 
-  // WIP
-
   addingListener();
-  // expandListener();
-  // minimizeListener();
   submitListener();
-  // addSingleRemoveListener();
-  // editListener();
   addCreateProjectListener();
   addSwitchProjectListener();
 }
 
 addEvents();
-
-// local storage fun
-
-// let tasksArray = [];
-
-// localStorage.setItem("tasks", JSON.stringify(tasksArray));
-
-// const data = JSON.parse(localStorage.getItem("tasks"));
