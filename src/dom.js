@@ -1,6 +1,16 @@
 import { taskFactory, taskCollection, checkIfFieldIsEmpty } from "./tasks.js";
 import { Project } from "./projects.js";
 
+import plusSign from "../src/images/iconmonstr-plus-2.svg";
+import downArrow from "../src/images/iconmonstr-arrow-65.svg";
+import removeImg from "../src/images/iconmonstr-x-mark-9.svg";
+import pencilImg from "../src/images/iconmonstr-pencil-8.svg";
+import checkingImg from "../src/images/iconmonstr-check-mark-13.svg";
+import upArrowImg from "../src/images/iconmonstr-arrow-66.svg";
+import warningLow from "../src/images/iconmonstr-warning-10-low.svg";
+import warningMedium from "../src/images/iconmonstr-warning-10-medium.svg";
+import warningHigh from "../src/images/iconmonstr-warning-10-high.svg";
+
 function createTasksWindow() {
   const tasksDiv = document.createElement("div");
   tasksDiv.setAttribute("id", "tasks");
@@ -9,7 +19,7 @@ function createTasksWindow() {
   const h1Element = document.createElement("h1");
   h1Element.innerHTML = "Tasks";
   const imgElement = document.createElement("img");
-  imgElement.setAttribute("src", "../src/images/iconmonstr-plus-2.svg");
+  imgElement.setAttribute("src", plusSign);
   const imgSpan = document.createElement("span");
   imgSpan.appendChild(imgElement);
 
@@ -31,23 +41,23 @@ function createTask(task) {
   let priorityLevel = setPriority(task.priority);
   priority.setAttribute("src", priorityLevel);
   const expandImg = document.createElement("img");
-  expandImg.setAttribute("src", "../src/images/iconmonstr-arrow-65.svg");
+  expandImg.setAttribute("src", downArrow);
   const expandSpan = document.createElement("span");
   expandSpan.classList.add("expand");
   expandSpan.appendChild(expandImg);
 
   const deleteButton = document.createElement("img");
-  deleteButton.setAttribute("src", "../src/images/iconmonstr-x-mark-9.svg");
+  deleteButton.setAttribute("src", removeImg);
   deleteButton.style.display = "none";
   deleteButton.classList.add("delete");
 
   const editButton = document.createElement("img");
-  editButton.setAttribute("src", "../src/images/iconmonstr-pencil-8.svg");
+  editButton.setAttribute("src", pencilImg);
   editButton.style.display = "none";
   editButton.classList.add("edit");
 
   const checkButton = document.createElement("img");
-  checkButton.setAttribute("src", "../src/images/iconmonstr-check-mark-13.svg");
+  checkButton.setAttribute("src", checkingImg);
   checkButton.style.display = "none";
   checkButton.classList.add("check");
 
@@ -71,22 +81,16 @@ function createTask(task) {
   closeSpan.classList.add("close");
 
   const closeArrow = document.createElement("img");
-  closeArrow.setAttribute("src", "../src/images/iconmonstr-arrow-66.svg");
+  closeArrow.setAttribute("src", upArrowImg);
   closeSpan.appendChild(closeArrow);
 
   descSection.appendChild(description);
   descSection.appendChild(closeSpan);
   taskDiv.appendChild(descSection);
 
-  // const tasks = document.getElementById("tasks");
   const taskList = document.querySelector(".task-list");
   taskDiv.setAttribute("value", taskList.attributes.value.nodeValue);
-  // check if task is already finished
-  // if (task.finished) {
 
-  // }
-
-  // tasks.appendChild(taskDiv);
   taskList.appendChild(taskDiv);
 }
 
@@ -186,11 +190,11 @@ function setPriority(priorityGrade) {
   let priority = Number(priorityGrade);
   switch (priority) {
     case 0:
-      return "../src/images/iconmonstr-warning-10-low.svg";
+      return warningLow;
     case 1:
-      return "../src/images/iconmonstr-warning-10-medium.svg";
+      return warningMedium;
     case 2:
-      return "../src/images/iconmonstr-warning-10-high.svg";
+      return warningHigh;
   }
 }
 
@@ -209,13 +213,6 @@ function createProject() {
   const projectsElement = document.getElementById("projects");
   projectsElement.appendChild(newProjectElement);
 
-  // add a function to create a new task-list where the value == the projectname
-
-  // const newTaskList = document.createElement("section");
-  // newTaskList.classList.add("task-list");
-  // newTaskList.value = projectName;
-  // const tasksElement = document.getElementById("tasks");
-  // tasksElement.appendChild(newTaskList);
   switchProject(projectName);
 }
 
